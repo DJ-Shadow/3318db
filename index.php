@@ -1,3 +1,6 @@
 <?php
-require("user_cake/index.php");
+
+header("Location: login/login.php");
+die();
+
 ?>

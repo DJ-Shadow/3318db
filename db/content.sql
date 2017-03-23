@@ -14692,4 +14692,117 @@ INSERT INTO `resources` (`md5`, `iso`, `filename`, `location`, `e_title`, `type`
 ('FFEBA5343379FDEABD998B70878B6F6E',	'eng',	'A26___15_Ezekiel_____ENGKJVO1DA.mp3',	'L:\\bibleLibraries\\premade\\eng_(English)\\audio\\eng_(English)_ENGKJVO1DA\\English_King_James_Version_OT_Non-drama\\',	'',	'audio',	'FCBH'),
 ('FFF385D5B2B2527505D9C426BA3685B1',	'eng',	'A02___20_Exodus______ENGKJVO1DA.mp3',	'L:\\bibleLibraries\\premade\\eng_(English)\\audio\\eng_(English)_ENGKJVO1DA\\English_King_James_Version_OT_Non-drama\\',	'',	'audio',	'FCBH');
 
--- 2017-03-23 01:58:04
+DROP TABLE IF EXISTS `uc_configuration`;
+CREATE TABLE `uc_configuration` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) NOT NULL,
+  `value` varchar(150) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+INSERT INTO `uc_configuration` (`id`, `name`, `value`) VALUES
+(1,	'website_name',	'content'),
+(2,	'website_url',	'localhost/3318_group_project'),
+(3,	'email',	'noreply@ILoveUserCake.com'),
+(4,	'activation',	'false'),
+(5,	'resend_activation_threshold',	'0'),
+(6,	'language',	'models/languages/en.php'),
+(7,	'template',	'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'),
+(8,	'style',	'../css/style.css');
+
+DROP TABLE IF EXISTS `uc_pages`;
+CREATE TABLE `uc_pages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `page` varchar(150) NOT NULL,
+  `private` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+
+INSERT INTO `uc_pages` (`id`, `page`, `private`) VALUES
+(1,	'account.php',	1),
+(2,	'activate-account.php',	0),
+(3,	'admin_configuration.php',	1),
+(4,	'admin_page.php',	1),
+(5,	'admin_pages.php',	1),
+(6,	'admin_permission.php',	1),
+(7,	'admin_permissions.php',	1),
+(8,	'admin_user.php',	1),
+(9,	'admin_users.php',	1),
+(10,	'forgot-password.php',	0),
+(11,	'index.php',	0),
+(12,	'left-nav.php',	0),
+(13,	'login.php',	0),
+(14,	'logout.php',	1),
+(15,	'register.php',	0),
+(16,	'resend-activation.php',	0),
+(17,	'user_settings.php',	1);
+
+DROP TABLE IF EXISTS `uc_permissions`;
+CREATE TABLE `uc_permissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+INSERT INTO `uc_permissions` (`id`, `name`) VALUES
+(1,	'New Member'),
+(2,	'Administrator');
+
+DROP TABLE IF EXISTS `uc_permission_page_matches`;
+CREATE TABLE `uc_permission_page_matches` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `permission_id` int(11) NOT NULL,
+  `page_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+
+INSERT INTO `uc_permission_page_matches` (`id`, `permission_id`, `page_id`) VALUES
+(1,	1,	1),
+(2,	1,	14),
+(3,	1,	17),
+(4,	2,	1),
+(5,	2,	3),
+(6,	2,	4),
+(7,	2,	5),
+(8,	2,	6),
+(9,	2,	7),
+(10,	2,	8),
+(11,	2,	9),
+(12,	2,	14),
+(13,	2,	17);
+
+DROP TABLE IF EXISTS `uc_users`;
+CREATE TABLE `uc_users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(50) NOT NULL,
+  `display_name` varchar(50) NOT NULL,
+  `password` varchar(225) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `activation_token` varchar(225) NOT NULL,
+  `last_activation_request` int(11) NOT NULL,
+  `lost_password_request` tinyint(1) NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `title` varchar(150) NOT NULL,
+  `sign_up_stamp` int(11) NOT NULL,
+  `last_sign_in_stamp` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+INSERT INTO `uc_users` (`id`, `user_name`, `display_name`, `password`, `email`, `activation_token`, `last_activation_request`, `lost_password_request`, `active`, `title`, `sign_up_stamp`, `last_sign_in_stamp`) VALUES
+(1,	'pholland',	'pholland',	'3076ba09e037d0aee9709b205a59d4b80ceded3eedf5c6dbcae35b4d81e9c275f',	'pxh013@shsu.edu',	'b60f8b64f3c118de08f0242127059ec4',	1490237198,	0,	1,	'New Member',	1490237198,	1490242653),
+(2,	'pongo',	'pongo',	'6f5f5f0349e96ec824570d6635a6b913c2d7a51a33dc8648827f473fa4bd86e6f',	'pongo@thedevneedscoffee.com',	'91f401acf9bf71e04cecd1a9b88d2817',	1490241661,	0,	1,	'New Member',	1490241661,	0);
+
+DROP TABLE IF EXISTS `uc_user_permission_matches`;
+CREATE TABLE `uc_user_permission_matches` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+INSERT INTO `uc_user_permission_matches` (`id`, `user_id`, `permission_id`) VALUES
+(1,	1,	2),
+(2,	1,	1),
+(3,	2,	1);
+
+-- 2017-03-23 04:21:13

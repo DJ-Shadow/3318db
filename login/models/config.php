@@ -26,6 +26,7 @@ $resend_activation_threshold = $settings['resend_activation_threshold']['value']
 $emailDate = date('dmy');
 $language = $settings['language']['value'];
 $template = $settings['template']['value'];
+$style = $settings['style']['value'];
 
 $master_account = -1;
 
